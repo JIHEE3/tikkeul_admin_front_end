@@ -15,6 +15,7 @@
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
     "axios": "^0.26.1",
+    "notistack": "^2.0.4",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-dropzone": "^12.0.5",
