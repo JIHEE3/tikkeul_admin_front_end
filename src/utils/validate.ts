@@ -1,6 +1,6 @@
 
 export function idPatternIsOk(id: string) {
-  const idRegex = new RegExp(/^[a-z]+[a-z0-9\-\_]{4,19}$/);
+  const idRegex = new RegExp(/^[a-z]+[a-z0-9\-_]{4,19}$/);
 
   if (idRegex.test(id)) {
     return true;
@@ -43,7 +43,7 @@ export function birthDatePatternIsOk(birthDate: string) {
 
 export function emailIsOk(s: string) {
   const emailRegex = new RegExp(
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
 
   if (emailRegex.test(s)) {
     return true;
