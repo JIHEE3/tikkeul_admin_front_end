@@ -3,12 +3,14 @@ import TextField from "@mui/material/TextField";
 
 type PhoneNumberProps = {
   name?: string;
+  label?: string;
   error?: boolean;
   helperText?: string;
   onChange?: Function;
 };
 export default function PhoneNumber({
   name,
+  label,
   error,
   helperText,
   onChange = (f: any) => f,
@@ -22,7 +24,7 @@ export default function PhoneNumber({
       const newValue = e.target.value
         .replace(/[^0-9]/g, "")
         .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
-        .replace(/(\-{1,2})$/g, "");
+        .replace(/(-{1,2})$/g, "");
       setValue(newValue);
       onChange(e);
     }
@@ -32,7 +34,7 @@ export default function PhoneNumber({
   return (
     <TextField
       name={name}
-      label="휴대전화"
+      label={label}
       variant="standard"
       value={value}
       error={error}

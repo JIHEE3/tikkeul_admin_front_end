@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 import Form from "components/templates/auth/Form";
 import GoMainButton from "components/UI/atoms/GoMainButton";
@@ -23,6 +25,8 @@ export interface IError {
 }
 
 export default function SignUp() {
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
   const [error, setError] = useState<IError>({
     id: "",
     password: "",
@@ -210,13 +214,15 @@ export default function SignUp() {
     }
 
     if (isOk) {
-      signUp({ ...model }).then((res) => {
-        // if (res.data) {
-        //   // 회원가입 성공 시 로그인 페이지로 이동
-        //   history.push(routes.signin);
-        // }
-      });
-      // history.push(routes.signin);
+      console.dir(model);
+      const res = await signUp({ ...model });
+      if (res.data.resultCode === 1) {
+        // 회원가입 성공 시 로그인 페이지로 이동
+        enqueueSnackbar("회원가입 성공!", { variant: "success" });
+        navigate("/signin");
+      } else {
+        enqueueSnackbar(res.data.message, { variant: "error" });
+      }
     }
   };
 
@@ -280,7 +286,7 @@ export default function SignUp() {
           helperText={error.birthDate}
           onChange={handleChange}
         />
-        <SelectGender />
+        <SelectGender name="gender" label="성별" onChange={handleChange} />
         <TextField
           name="email"
           label="이메일"
@@ -292,6 +298,7 @@ export default function SignUp() {
         />
         <PhoneNumber
           name="phoneNumber"
+          label="휴대전화"
           error={!!error.phoneNumber}
           helperText={error.phoneNumber}
           onChange={handleChange}
