@@ -214,11 +214,13 @@ export default function SignUp() {
     }
 
     if (isOk) {
-      console.dir(model);
       const res = await signUp({ ...model });
       if (res.data.resultCode === 1) {
         // 회원가입 성공 시 로그인 페이지로 이동
         enqueueSnackbar("회원가입 성공!", { variant: "success" });
+        if (!!res.data.message) {
+          enqueueSnackbar(res.data.message, { variant: "warning" });
+        }
         navigate("/signin");
       } else {
         enqueueSnackbar(res.data.message, { variant: "error" });
