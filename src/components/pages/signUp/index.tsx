@@ -75,7 +75,6 @@ export default function SignUp() {
     name: string;
     value: string;
   }): Promise<IError> => {
-    // const newError = { ...error };
     const newError: IError = {};
 
     if (name === "id") {
@@ -86,22 +85,14 @@ export default function SignUp() {
         if (!idPatternIsOk(value)) {
           newError.id =
             "영어 소문자로 시작하는, 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
+        } else {
+          //userId 중복 체크
+          const res = await isExistedId({ id: value });
+
+          if (res.data.isExist) {
+            newError.id = "중복된 아이디 입니다.";
+          }
         }
-
-        //userId 중복 체크
-        const res = await isExistedId({ id: value });
-
-        // if (res.data.result === false) {
-        //   setError({
-        //     ...error,
-        //     [name]: "중복된 아이디 입니다.",
-        //   });
-        // } else {
-        //   setError({
-        //     ...error,
-        //     [name]: "",
-        //   });
-        // }
       }
     }
 
@@ -157,10 +148,6 @@ export default function SignUp() {
         newError.phoneNumber = "필수사항입니다.";
       }
     }
-
-    // setError({
-    //   ...newError,
-    // });
 
     return newError;
   };

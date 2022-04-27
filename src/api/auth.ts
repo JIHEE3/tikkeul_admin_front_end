@@ -2,8 +2,13 @@ import client from './client';
 import IUser from 'types/IUser';
 import { AxiosResponse } from 'axios';
 
-export async function isExistedId({ id }: { id: string }) {
-
+export async function isExistedId({ id }: { id: string }): Promise<AxiosResponse> {
+  try {
+    return client.get(`/admin/exist/${id}`);
+  } catch (error) {
+    console.log(error);
+    throw (error);
+  }
 }
 
 
