@@ -50,8 +50,6 @@ export default function SignIn() {
   const handleSignInClick = () => {
     const { id, password } = model;
 
-    console.log(id, password);
-
     if (!model.id || !model.password) {
       setError({
         ...initError,
@@ -82,7 +80,7 @@ export default function SignIn() {
   };
 
   return (
-    <Form title="Sign In">
+    <Form title="Sign In" maxWidth="xs">
       <Stack spacing={2}>
         <TextField
           name="id"

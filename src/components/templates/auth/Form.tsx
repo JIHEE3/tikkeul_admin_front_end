@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
+import { Breakpoint, styled } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { deepPurple, blue } from "@mui/material/colors";
@@ -34,13 +34,14 @@ const StyledForm = styled("form")`
 
 type FormProps = {
   title: string;
+  maxWidth?: Breakpoint | false;
   children?: React.ReactNode;
 };
 
-export default function Form({ title, children }: FormProps) {
+export default function Form({ title, maxWidth = "sm", children }: FormProps) {
   return (
     <Background>
-      <RootContainer maxWidth="sm">
+      <RootContainer maxWidth={maxWidth}>
         <TitleTypography
           variant="h2"
           color="textPrimary"
